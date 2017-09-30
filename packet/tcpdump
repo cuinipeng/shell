@@ -1,0 +1,14 @@
+tcpdump -i eth0 -n -nn -c 1 -w protocol.pcap
+
+hexdump -C protocol.pcap
+
+tcpdump -i eth0 -n -nn -c 1 -X
+
+```
+python
+from scapy.all import *
+
+packets = rdpcap("protocol.pcap")
+for packet in packets:
+    packet.show()
+```
