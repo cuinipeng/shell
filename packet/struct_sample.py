@@ -80,10 +80,26 @@ def test_4():
     struct.pack_into("{0}s".format(len(ua)), buf, 0, ua)
     print(repr(buf.raw))
     print(type(buf.raw))    # <type 'str'>
+    ctypes.memset(buf, 0, buf._length_)
+
+
+def test_5():
+    class POINT(ctypes.Structure):
+    # class POINT(ctypes.BigEndianStructure):
+        _fields_ = [
+            ("x", ctypes.c_int),
+            ("y", ctypes.c_int)
+        ]
+
+    point = POINT(10, 20)
+    print(point.x, point.y)
+
+    point = POINT(y=30)
+    print(point.x, point.y)
 
 
 def main():
-    test_1()
+    test_5()
 
 
 if __name__ == "__main__":
